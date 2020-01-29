@@ -1,0 +1,107 @@
+// Input for closed-shell Hartree-Fock calculations.
+// Average over configuration fractional occupancy is supported, so closed orbitals can have ocuppancy between 0 and |2Kappa|(4L + 2).
+// Parameters for atomic calculations.
+
+#GENERAL
+Zn        // Name.
+80        // Nuclear charge.
+200.592   // Nuclear mass.
+DHF       // Hamiltonian model ("NONREL", "DHF", "DHFB"). Default "DHF".
+NEW       // start "NEW" calculation, or "RESUME" a previous one. "Name" in the input and file name have to match!
+USER      // Basis set: "GEOMETRIC" (alpha and beta required) or "USER" defined (explicit expression for exponents required).
+// Core (all shells are closed):
+
+#STRUCTURE
+// Non-relativistic configuration, supports core entries [He, Ne, Ar, Cr, Xe, Rn]
+[Xe](4f 14)(5d 10)(6s 2)
+
+#BASIS
+// Format for geometric basis:
+// Number_of_basis_functions alpha beta , so that f_n ~ exp(-alpha_n*r^2), where alpha_n = alpha*beta^(n-1).
+30              // L = 0
+6.12469008E+07
+1.63000198E+07
+5.58135711E+06
+2.12640907E+06
+8.86684811E+05
+3.90779773E+05
+1.80369752E+05
+8.59773549E+04
+4.21024785E+04
+2.10667513E+04
+1.07455838E+04
+5.57522121E+03
+2.93833272E+03
+1.57096876E+03
+8.50730159E+02
+4.65857114E+02
+2.58020082E+02
+1.45133810E+02
+8.23885044E+01
+4.61241165E+01
+2.68797286E+01
+1.54467071E+01
+8.42550174E+00
+4.69598090E+00
+2.41595084E+00
+1.28093959E+00
+6.38447244E-01
+2.24481117E-01
+9.65966421E-02
+4.11919795E-02
+24              // L = 1
+2.72039001E+07
+5.66150036E+06
+1.42173815E+06
+4.03843590E+05
+1.26214315E+05
+4.27883259E+04
+1.56495125E+04
+6.16080146E+03
+2.59916366E+03
+1.16569241E+03
+5.49810622E+02
+2.69851209E+02
+1.36974621E+02
+7.09420476E+01
+3.78828185E+01
+2.03243813E+01
+1.06003768E+01
+5.51996470E+00
+2.70842935E+00
+1.32946819E+00
+6.06782224E-01
+2.06510308E-01
+7.80716257E-02
+2.89365113E-02
+15              // L = 2
+1.56799497E+04
+3.96521969E+03
+1.38730221E+03
+5.74157103E+02
+2.62484917E+02
+1.28173466E+02
+6.50548228E+01
+3.39286102E+01
+1.76854909E+01
+9.04625288E+00
+4.56392220E+00
+2.16373781E+00
+9.86526299E-01
+4.17692814E-01
+1.58951527E-01
+11              // L = 3
+8.70518113E+02
+2.96276315E+02
+1.26111670E+02
+5.96664184E+01
+2.98407780E+01
+1.53224830E+01
+7.82669725E+00
+3.88627997E+00
+1.77363778E+00
+6.12091882E-01
+2.11236180E-01
+2               // L = 4
+1.36258277E+00
+4.70234600E-01

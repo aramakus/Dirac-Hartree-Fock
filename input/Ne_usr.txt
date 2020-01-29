@@ -1,0 +1,51 @@
+// Input for closed-shell Hartree-Fock calculations.
+// Average over configuration fractional occupancy is supported, so closed orbitals can have ocuppancy between 0 and |2Kappa|(4L + 2).
+// Parameters for atomic calculations.
+
+#GENERAL
+Ne        // Name.
+10        // Nuclear charge.
+20.1797   // Nuclear mass.
+DHF       // Hamiltonian model ("NONREL", "DHF", "DHFB"). Default "DHF".
+NEW       // start "NEW" calculation, or "RESUME" a previous one. "Name" in the input and file name have to match!
+USER      // Basis set: "GEOMETRIC" (alpha and beta required) or "USER" defined (explicit expression for exponents required).
+// Core (all shells are closed):
+
+#STRUCTURE
+// Non-relativistic configuration, supports core entries [He, Ne, Ar, Cr, Xe, Rn]
+[Ne]
+
+#BASIS
+18        // L = 0
+2598845.0
+389291.20
+88614.780
+25103.590
+8190.9100
+2957.4970
+1153.7430
+478.68000
+208.86450
+94.993240
+44.686810
+21.623280
+10.694420
+5.3116980
+2.4260520
+1.1181120
+0.5073780
+0.2239600
+13        // L = 1
+3257.3130
+771.04600
+250.53310
+95.903730
+40.633480
+18.409490
+8.7624680
+4.3143110
+2.1515010
+1.0676350
+0.5224000
+0.2508430
+0.1157080
