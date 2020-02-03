@@ -230,11 +230,11 @@ int CardIn::REL_assign_opened(vector<Gspinor> & Large, vector<Gspinor> & Small, 
 			}
 		}
 		if (!found) {
-			Occ = occ[a]*(2.*L[a] + 2.)/(4*L[a] + 2);
 			Large.push_back(Gspinor());
 			Large.back().l = L[a];
 			Large.back().j = L[a] + 0.5;
 			Large.back().k = -L[a]-1;
+      Occ = occ[a]*2.*abs(Large.back().k)/(4*L[a] + 2);
 			Large.back().occup.push_back(Occ);
 			if (occ[a] != 4*L[a] + 2) Large.back().is_open = true;
 			Small.push_back(Gspinor());
@@ -244,11 +244,11 @@ int CardIn::REL_assign_opened(vector<Gspinor> & Large, vector<Gspinor> & Small, 
 			Small.back().occup.push_back(Occ);
 			if (occ[a] != 4*L[a] + 2) Small.back().is_open = true;
 			if (L[a] > 0) {
-				Occ = occ[a]*2.*L[a]/(4*L[a] + 2);
 				Large.push_back(Gspinor());
 				Large.back().l = L[a];
 				Large.back().j = L[a] - 0.5;	
 				Large.back().k = L[a];
+        Occ = occ[a]*2.*abs(Large.back().k)/(4*L[a] + 2);
 				Large.back().occup.push_back(Occ);	
 				if (occ[a] != 4*L[a] + 2) Large.back().is_open = true;
 				Small.push_back(Gspinor());

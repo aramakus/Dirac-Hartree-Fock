@@ -3,9 +3,9 @@
 // Parameters for atomic calculations.
 
 #GENERAL
-Ne        // Name.
-10        // Nuclear charge.
-20.1797   // Nuclear mass.
+O         // Name.
+8         // Nuclear charge.
+16        // Nuclear mass.
 DHF       // Hamiltonian model ("NONREL", "DHF", "DHFB"). Default "DHF".
 NEW       // start "NEW" calculation, or "RESUME" a previous one. "Name" in the input and file name have to match!
 GEOMETRIC // Basis set: "GEOMETRIC" (alpha and beta required) or "USER" defined (explicit expression for exponents required).
@@ -13,10 +13,10 @@ GEOMETRIC // Basis set: "GEOMETRIC" (alpha and beta required) or "USER" defined 
 
 #STRUCTURE
 // Non-relativistic configuration, supports core entries [He, Ne, Ar, Cr, Xe, Rn]
-[Ne]
+[He](2s 2)(2p 4)
 
 #BASIS
 // Format for geometric basis:
-// Number_of_basis_functions alpha beta , so that f_n ~ exp(-alpha_n*r^2), where alpha_n = alpha*beta^(n-1).
+// 'Number_of_basis_functions' 'alpha' 'beta' , so that f_n ~ exp(-alpha_n*r^2), where alpha_n = alpha*beta^(n-1).
 20 0.01 2.4  // L = 0
 20 0.01 2.4  // L = 1

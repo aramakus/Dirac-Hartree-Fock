@@ -39,13 +39,8 @@ private:
 	vector<VectorXd> EigVals;
 	vector<MatrixXd> oEigVecs;
 	vector<VectorXd> oEigVals;
-	void makeDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small);
 
 	MatrixXd make_cProj(vector<Gspinor> & Large, int K);
-	int make_cG(vector<Gspinor> & Large, vector<Gspinor> & Small);
-	int make_cG(vector<Gspinor> & Large);
-	int make_oG(vector<Gspinor> & Large, vector<Gspinor> & Small);
-	int make_oG(vector<Gspinor> & Large);
 
 	void make_cG(vector<Gspinor> & Large, int K1, int K2);
 	void make_oG(vector<Gspinor> & Large, int K);
@@ -53,7 +48,7 @@ private:
 	void make_oDens(double p, vector<Gspinor> & Large);
 
   void make_cG(vector<Gspinor> & Large, vector<Gspinor> & Small, int K1, int K2);
-	void make_oG(vector<Gspinor> & Large, vector<Gspinor> & Small, int K);
+	void make_oG(vector<Gspinor> & Large, vector<Gspinor> & Small, int K1, int K2);
   void make_cDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small);
 	void make_oDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small);
 
