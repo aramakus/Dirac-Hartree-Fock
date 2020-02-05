@@ -55,25 +55,15 @@ struct Gspinor
 
 struct Density
 {
-	vector<Eigen::MatrixXd> cLL;// Closed orbital Large-Large Density matrixes for each Kappa(L).
-	vector<Eigen::MatrixXd> cLS;// Closed orbital Large-Small Density matrixes for each Kappa.
-	vector<Eigen::MatrixXd> cSS;// Closed orbital Small-Small Density matrixes for each Kappa.
-	vector<Eigen::MatrixXd> oLL;// Closed orbital Large-Large Density matrixes for each Kappa(L).
-	vector<Eigen::MatrixXd> oLS;// Closed orbital Large-Small Density matrixes for each Kappa.
-	vector<Eigen::MatrixXd> oSS;// Closed orbital Small-Small Density matrixes for each Kappa.
-};
-
-struct Fast_Density
-{
 	vector<vector<double>> cLL;
 	vector<vector<double>> cSS;
-	vector<vector<double>> cLs;
+	vector<vector<double>> cLS;
 	vector<vector<double>> oLL;
 	vector<vector<double>> oSS;
 	vector<vector<double>> oLS;
 };
 
-struct Fast_Coulomb
+struct Coulomb
 {
 	vector<vector<double>> cl; // closed.
 	vector<vector<double>> op; // open.

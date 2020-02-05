@@ -16,10 +16,9 @@ public:
 	vector<MatrixXd> I;// Nuclear + Kinetic energy matrix.
 	vector<MatrixXd> cG;// Direct and Exchange two-particle part of the Hamilotinian form.
 	vector<MatrixXd> oG;// Direct and Exchange two-particle part of the Hamilotinian form.
-	Density Dens; // Close and open shell density matrix.
 	
-  vector<Fast_Density> Dens_test; // Close and open shell density matrix.
-	vector<Fast_Coulomb> G;
+  vector<Density> Dens; // Close and open shell density matrix.
+	vector<Coulomb> G;
   
 	vector<MatrixXd> Overlap;// Overlap matrix.
 	// Relativistic Hydrogenic ion. Initial guess for rel SelfConsist.
@@ -54,9 +53,8 @@ private:
   void make_cDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small);
 	void make_oDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small);
 
-	void sym_Matr(vector<MatrixXd> & M);
-  void sym_Matr(vector<Fast_Coulomb> & M);
-  void REL_sym_Matr(vector<MatrixXd> & M);
+  void sym_Matr(vector<Coulomb> & M);
+  void REL_sym_Matr(vector<Coulomb> & M);
 	vector<int> Dim;// List of basis set size for each Kappa(L).
 
 	map<int, char> L_to_symb = {{0, 's'}, {1, 'p'}, {2, 'd'}, {3, 'f'}, {4, 'g'}, {5, 'h'}};
