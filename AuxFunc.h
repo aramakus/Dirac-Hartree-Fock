@@ -63,3 +63,18 @@ struct Density
 	vector<Eigen::MatrixXd> oSS;// Closed orbital Small-Small Density matrixes for each Kappa.
 };
 
+struct Fast_Density
+{
+	vector<vector<double>> cLL;
+	vector<vector<double>> cSS;
+	vector<vector<double>> cLs;
+	vector<vector<double>> oLL;
+	vector<vector<double>> oSS;
+	vector<vector<double>> oLS;
+};
+
+struct Fast_Coulomb
+{
+	vector<vector<double>> cl; // closed.
+	vector<vector<double>> op; // open.
+};

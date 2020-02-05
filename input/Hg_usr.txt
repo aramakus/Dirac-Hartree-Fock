@@ -6,7 +6,7 @@
 Zn        // Name.
 80        // Nuclear charge.
 200.592   // Nuclear mass.
-DHF       // Hamiltonian model ("NONREL", "DHF", "DHFB"). Default "DHF".
+NONREL       // Hamiltonian model ("NONREL", "DHF", "DHFB"). Default "DHF".
 NEW       // start "NEW" calculation, or "RESUME" a previous one. "Name" in the input and file name have to match!
 USER      // Basis set: "GEOMETRIC" (alpha and beta required) or "USER" defined (explicit expression for exponents required).
 // Core (all shells are closed):

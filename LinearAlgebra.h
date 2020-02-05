@@ -17,9 +17,10 @@ public:
 	vector<MatrixXd> cG;// Direct and Exchange two-particle part of the Hamilotinian form.
 	vector<MatrixXd> oG;// Direct and Exchange two-particle part of the Hamilotinian form.
 	Density Dens; // Close and open shell density matrix.
-	vector<MatrixXd> DensLL;// Large-Large Density matrixes for each Kappa(L).
-	vector<MatrixXd> DensLS;// Large-Small Density matrixes for each Kappa.
-	vector<MatrixXd> DensSS;// Small-Small Density matrixes for each Kappa.
+	
+  vector<Fast_Density> Dens_test; // Close and open shell density matrix.
+	vector<Fast_Coulomb> G;
+  
 	vector<MatrixXd> Overlap;// Overlap matrix.
 	// Relativistic Hydrogenic ion. Initial guess for rel SelfConsist.
 	void SolveFock(vector<Gspinor> & Large, vector<Gspinor> & Small);
@@ -40,6 +41,7 @@ private:
 	vector<MatrixXd> oEigVecs;
 	vector<VectorXd> oEigVals;
 
+
 	MatrixXd make_cProj(vector<Gspinor> & Large, int K);
 
 	void make_cG(vector<Gspinor> & Large, int K1, int K2);
@@ -53,9 +55,11 @@ private:
 	void make_oDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small);
 
 	void sym_Matr(vector<MatrixXd> & M);
+  void sym_Matr(vector<Fast_Coulomb> & M);
   void REL_sym_Matr(vector<MatrixXd> & M);
 	vector<int> Dim;// List of basis set size for each Kappa(L).
 
 	map<int, char> L_to_symb = {{0, 's'}, {1, 'p'}, {2, 'd'}, {3, 'f'}, {4, 'g'}, {5, 'h'}};
 	string SymbAng(int kappa);
 };
+
