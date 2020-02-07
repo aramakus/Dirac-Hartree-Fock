@@ -3,7 +3,7 @@
 // Parameters for atomic calculations.
 
 #GENERAL
-Zn        // Name.
+Hg        // Name.
 80        // Nuclear charge.
 200.592   // Nuclear mass.
 DHF       // Hamiltonian model ("NONREL", "DHF", "DHFB"). Default "DHF".

@@ -1,7 +1,40 @@
-#include "stdafx.h"
+/*===========================================================================
+This file is part of Atom.
+
+    Atom is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Atom is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Atom.  If not, see <https://www.gnu.org/licenses/>.
+===========================================================================*/
+
+// ======================= Atom =======================
+//
+// Program for relativistic (DHF) and non-relativistic
+// (HF) atomic calculations. Gaussian basis is used 
+// for NR and G-spinor basis for DHF routines (see 
+// "Handbook of Molecular Physics and Quantum 
+// Chemistry" 2:6:31, p. 696–716 by H. M . Quiney). 
+// Open shell atoms are treated using average over
+// configuration approximation (see "Case Studies in
+// Atomic Physics IV" by E. W. McDaniel and 
+// M. R. C. McDowell, 1975). Finite nuclear effects
+// are included in the calculation.
+//
+// ====================================================
 #include "CardIn.h"
 #include "LinearAlgebra.h"
-#include <ctime> 
+#include <ctime>
+#include <fstream>
+#include <string>
+#include <vector>
 
 using namespace std;
 

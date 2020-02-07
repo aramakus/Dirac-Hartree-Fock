@@ -1,6 +1,22 @@
+/*===========================================================================
+This file is part of Atom.
+
+    Atom is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Atom is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Atom.  If not, see <https://www.gnu.org/licenses/>.
+===========================================================================*/
 #pragma once
-#include "stdafx.h"
 #include <cmath>
+#include <vector>
 #include <eigen3/Eigen/Dense>
 
 using namespace std;
@@ -47,7 +63,6 @@ struct Gspinor
 	int k;//kappa
 	vector<double> occup;//list of occupancies of orbitals with this Kappa(L)
   vector<double> energy;//single particle energy. 
-  vector<vector<double>> C_expansion;//Orbital expansion coefficients.
 	float j;//total orbital momentum
 	int atom = 0;//atom to which it belongs
 	bool is_open = false;

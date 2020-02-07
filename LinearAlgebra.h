@@ -1,3 +1,19 @@
+/*===========================================================================
+This file is part of Atom.
+
+    Atom is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Atom is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Atom.  If not, see <https://www.gnu.org/licenses/>.
+===========================================================================*/
 #pragma once
 
 #include "CardIn.h"
@@ -13,22 +29,21 @@ class LinearAlgebra : AuxFunc
 public:
 	LinearAlgebra(CardIn & input);
 
-	vector<MatrixXd> I;// Nuclear + Kinetic energy matrix.
-	vector<MatrixXd> cG;// Direct and Exchange two-particle part of the Hamilotinian form.
-	vector<MatrixXd> oG;// Direct and Exchange two-particle part of the Hamilotinian form.
+	vector<MatrixXd> I; // Nuclear + Kinetic energy matrix.
+	vector<MatrixXd> cG; // Direct and Exchange two-particle part of the Hamilotinian form.
+	vector<MatrixXd> oG; // Direct and Exchange two-particle part of the Hamilotinian form.
 	
   vector<Density> Dens; // Close and open shell density matrix.
 	vector<Coulomb> G;
   
-	vector<MatrixXd> Overlap;// Overlap matrix.
-	// Relativistic Hydrogenic ion. Initial guess for rel SelfConsist.
-	void SolveFock(vector<Gspinor> & Large, vector<Gspinor> & Small);
-	// Non-Rel Hydrogenic ion. Initial guess for non-rel SelfConsist.
-	void SolveFock(vector<Gspinor> & Large);
-	// DHF.
-	void IterateHF(vector<Gspinor> & Large, vector<Gspinor> & Small);
-	// HF.
-	void IterateHF(vector<Gspinor> & Large);
+	vector<MatrixXd> Overlap; // Overlap matrix.
+	
+	void SolveFock(vector<Gspinor> & Large, vector<Gspinor> & Small); // Relativistic Hydrogenic ion. Initial guess for rel SelfConsist.
+	void SolveFock(vector<Gspinor> & Large); // Non-Rel Hydrogenic ion. Initial guess for non-rel SelfConsist.
+	void IterateHF(vector<Gspinor> & Large, vector<Gspinor> & Small); // DHF.
+	void IterateHF(vector<Gspinor> & Large); // HF.
+
+	int save_if_converged(vector<Gspinor> & Large, vector<Gspinor> & Small); // Save final result if convergence was achieved. TODO!!!
 
 	~LinearAlgebra();
 private:
@@ -39,9 +54,6 @@ private:
 	vector<VectorXd> EigVals;
 	vector<MatrixXd> oEigVecs;
 	vector<VectorXd> oEigVals;
-
-
-	MatrixXd make_cProj(vector<Gspinor> & Large, int K);
 
 	void make_cG(vector<Gspinor> & Large, int K1, int K2);
 	void make_oG(vector<Gspinor> & Large, int K);
@@ -59,5 +71,10 @@ private:
 
 	map<int, char> L_to_symb = {{0, 's'}, {1, 'p'}, {2, 'd'}, {3, 'f'}, {4, 'g'}, {5, 'h'}};
 	string SymbAng(int kappa);
+
+	bool converged = false;
 };
 
+// TODO LIST:
+// 1. Parallelize make_cG and make_oG using OMP.
+// 2. Add save_if_converged to save successfull calculations.

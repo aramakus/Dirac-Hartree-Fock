@@ -1,3 +1,19 @@
+/*===========================================================================
+This file is part of Atom.
+
+    Atom is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Atom is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Atom.  If not, see <https://www.gnu.org/licenses/>.
+===========================================================================*/
 #include "CardIn.h"
 #include <map>
 
@@ -106,7 +122,6 @@ CardIn::CardIn(string filename, vector<Gspinor> & Large, vector<Gspinor> & Small
 	}
 }
 
-
 int CardIn::REL_assign_closed(vector<Gspinor> & Large, vector<Gspinor> & Small, string line, ofstream & log)
 { 
 	// Given a non-relativistic value of angular momentum L
@@ -198,11 +213,6 @@ int CardIn::NR_assign_closed(vector<Gspinor> & Large, string line, ofstream & lo
 		return 1;
 	}
 
-  for (int K = 0; K < Large.size(); K++) {
-    Large[K].energy.resize(Large[K].occup.size());
-    Large[K].C_expansion.resize(Large[K].occup.size(), vector<double>(Large[K].lambda.size(), 0.));
-  }
-
 	return 0;
 }
 
@@ -265,8 +275,6 @@ int CardIn::REL_assign_opened(vector<Gspinor> & Large, vector<Gspinor> & Small, 
   for (int K = 0; K < Large.size(); K++) {
     Large[K].energy.resize(Large[K].occup.size());
     Small[K].energy.resize(Small[K].occup.size());
-    Large[K].C_expansion.resize(Large[K].occup.size(), vector<double>(Large[K].lambda.size(), 0.));
-    Small[K].C_expansion.resize(Small[K].occup.size(), vector<double>(Small[K].lambda.size(), 0.));
   }
 	return 0;
 }
@@ -300,6 +308,8 @@ int CardIn::NR_assign_opened(vector<Gspinor> & Large, string line, ofstream & lo
 
 	}
 	
+  for (int K = 0; K < Large.size(); K++) Large[K].energy.resize(Large[K].occup.size());
+
 	return 0;
 }
 

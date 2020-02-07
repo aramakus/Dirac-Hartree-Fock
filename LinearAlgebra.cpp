@@ -1,3 +1,19 @@
+/*===========================================================================
+This file is part of Atom.
+
+    Atom is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Atom is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Atom.  If not, see <https://www.gnu.org/licenses/>.
+===========================================================================*/
 #include "LinearAlgebra.h"
 #include "OnePartInt.h"
 #include "TwoPartInt.h"
@@ -81,7 +97,7 @@ void LinearAlgebra::SolveFock(vector<Gspinor> & Large)
 void LinearAlgebra::IterateHF(vector<Gspinor> & Large)
 {
 	// Non-relativistic atomic Hartree-Fock calculation.
-	// Solves set of coupled generalized eigenvalue problems:
+	// Solves a set of coupled generalized eigenvalue problems:
 	//
 	//	F(l)C(l) = e(l)S(l)C(l)
 	//
@@ -200,18 +216,22 @@ void LinearAlgebra::IterateHF(vector<Gspinor> & Large)
 	for (int K = 0; K < Large.size(); K++) {
 		printf("\n");
 		for (int i = 0; i < Large[K].occup.size(); i++) {
-			if (Large[K].occup[i] == 4*Large[K].l + 2)	printf("  %d%c :  [%-6.8f]\n", i+1+Large[K].l, L_to_symb.at(Large[K].l), EigVals[K][i]);
-			else printf("  %d%c :  [%-6.8f]\n", i+1+Large[K].l, L_to_symb.at(Large[K].l), oEigVals[K][i]);
+			if (Large[K].occup[i] == 4*Large[K].l + 2)	{
+				printf("  %d%c :  [%-6.8f]\n", i+1+Large[K].l, L_to_symb.at(Large[K].l), EigVals[K][i]);
+				Large[K].energy[i] = EigVals[K][i];
+			}	else {
+				printf("  %d%c :  [%-6.8f]\n", i+1+Large[K].l, L_to_symb.at(Large[K].l), oEigVals[K][i]);
+				Large[K].energy[i] = EigVals[K][i];
+			}
 		}
 	}
 	printf("\n");
 }
 
-
 void LinearAlgebra::IterateHF(vector<Gspinor> & Large, vector<Gspinor> & Small)
 {
 	// Atomic Dirac-Hartree-Fock calculation.
-	// Solves set of coupled generalized eigenvalue problems:
+	// Solves a set of coupled generalized eigenvalue problems:
 	//
 	//	F(kappa)C(kappa) = e(kappa)S(kappa)C(kappa)
 	//
@@ -352,8 +372,15 @@ void LinearAlgebra::IterateHF(vector<Gspinor> & Large, vector<Gspinor> & Small)
 		printf("\n");
 		for (int i = 0; i < Large[K].occup.size(); i++) {
       myStr = SymbAng(Large[K].k);
-      if (Large[K].occup[i] == 2*abs(Large[K].k)) energy = EigVals[K][i+Dim[K]];
-      else energy = oEigVals[K][i+Dim[K]];
+      if (Large[K].occup[i] == 2*abs(Large[K].k)) {
+				energy = EigVals[K][i+Dim[K]];
+				Large[K].energy[i] = EigVals[K][i];
+				Small[K].energy[i] = EigVals[K][i];
+			} else {
+				energy = oEigVals[K][i+Dim[K]];
+				Large[K].energy[i] = oEigVals[K][i];
+				Small[K].energy[i] = EigVals[K][i];
+			}
 			
 			printf("  %d%s :  [%6.8f]\n", i+1+Large[K].l, myStr.c_str(), energy);
 		}
@@ -889,32 +916,16 @@ void LinearAlgebra::REL_sym_Matr(vector<Coulomb> & M)
 	}
 }
 
-MatrixXd LinearAlgebra::make_cProj(vector<Gspinor> & Large, int K)
+/*
+int LinearAlgebra::save_if_converged(vector<Gspinor> & Large, vector<Gspinor> & Small)
 {
-	MatrixXd Result = MatrixXd::Zero(Dim[K],Dim[K]);
-	double DensLLtmp = 0;
-	int N = -1;
-	int ClsOcc = 4 * Large[K].l + 2;
-	if (!Large[K].is_open) return Result;
-	// Locate open shell.
-	for (int n = 0; n < Large[K].occup.size(); n++) {
-		if (Large[K].occup[n] != ClsOcc) {
-			N = n;
-			break;
-		}
-	}
+	if (!converged) return 1;
 
-	for (int i = 0; i < Dim[K]; i++) {
-		for (int j = i; j < Dim[K]; j++) {
-			DensLLtmp = 0;
-			DensLLtmp = Large[K].occup[N] * EigVecs[K](i, N) * EigVecs[K](j, N);
-			Result(i, j) = DensLLtmp;
-			Result(j, i) = DensLLtmp;
-		}
-	}
+	
 
-	return Result;
-}
+
+	return 0;
+}*/
 
 
 LinearAlgebra::~LinearAlgebra()
