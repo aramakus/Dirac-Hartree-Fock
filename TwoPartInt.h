@@ -23,7 +23,7 @@ using namespace std;
 
 class TwoPartInt : AuxFunc
 {
-    // Calculates two electron atomic integrals.
+    // Class to calculate two electron atomic integrals.
 public:
     // Pre-calculates non-relativistic 3j symbols /la k lb\
     //                                            \ 0 0 0 /

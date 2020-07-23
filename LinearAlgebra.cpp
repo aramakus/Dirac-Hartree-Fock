@@ -26,6 +26,7 @@ LinearAlgebra::LinearAlgebra(CardIn & Input) : input(Input)
 {
 }
 
+// Solve homogenous relativistic radial Dirac equation.
 void LinearAlgebra::SolveFock(vector<Gspinor> & Large, vector<Gspinor> & Small)
 {
 	I.resize(Large.size());
@@ -64,6 +65,7 @@ void LinearAlgebra::SolveFock(vector<Gspinor> & Large, vector<Gspinor> & Small)
 	}
 }
 
+// Solve homogenous non-relativistic radial Dirac equation.
 void LinearAlgebra::SolveFock(vector<Gspinor> & Large)
 {
 	I.resize(Large.size());
@@ -94,6 +96,7 @@ void LinearAlgebra::SolveFock(vector<Gspinor> & Large)
 	}
 }
 
+// Solve iteratively non-relativistic Hartree-Fock equation. Run SolveFock first to make initial guess.
 void LinearAlgebra::IterateHF(vector<Gspinor> & Large)
 {
 	// Non-relativistic atomic Hartree-Fock calculation.
@@ -228,6 +231,7 @@ void LinearAlgebra::IterateHF(vector<Gspinor> & Large)
 	printf("\n");
 }
 
+// Solve iteratively relativistic Hartree-Fock equation. Run SolveFock first to make initial guess.
 void LinearAlgebra::IterateHF(vector<Gspinor> & Large, vector<Gspinor> & Small)
 {
 	// Atomic Dirac-Hartree-Fock calculation.
@@ -388,6 +392,7 @@ void LinearAlgebra::IterateHF(vector<Gspinor> & Large, vector<Gspinor> & Small)
 	printf("\n");
 }
 
+// Make closed-shell non-relativistic density matrix.
 void LinearAlgebra::make_cDens(double p, vector<Gspinor> & Large)
 {
 	// Construct non-relativistic density matrix.
@@ -412,6 +417,7 @@ void LinearAlgebra::make_cDens(double p, vector<Gspinor> & Large)
 
 }
 
+// Make open-shell non-relativistic density matrix.
 void LinearAlgebra::make_oDens(double p, vector<Gspinor> & Large)
 {
 	// Construct non-relativistic open shell density matrix.
@@ -452,6 +458,7 @@ void LinearAlgebra::make_oDens(double p, vector<Gspinor> & Large)
 	}
 }
 
+// Make closed-shell non-relativistic Coulomb matrix. Includes open shell contributions.
 void LinearAlgebra::make_cG(vector<Gspinor> & Large, int K1, int K2)
 {
 	// Function that construct Coulomb repulsion matrix.
@@ -502,6 +509,7 @@ void LinearAlgebra::make_cG(vector<Gspinor> & Large, int K1, int K2)
 
 }
 
+// Subtract excess open-shell contributions from non-relativistic Coulomb matrix.
 void LinearAlgebra::make_oG(vector<Gspinor> & Large, int K)
 {
 	// Function that construct Coulomb repulsion matrix.
@@ -561,6 +569,7 @@ void LinearAlgebra::make_oG(vector<Gspinor> & Large, int K)
 
 }
 
+// Make closed-shell relativistic density matrix.
 void LinearAlgebra::make_cDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small)
 {
   // Construct relativistic density matrix.
@@ -604,6 +613,7 @@ void LinearAlgebra::make_cDens(double p, vector<Gspinor> & Large, vector<Gspinor
 	}
 }
 
+// Make open-shell relativistic density matrix.
 void LinearAlgebra::make_oDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small)
 {
 	// Construct relativistic open-shell density matrix.
@@ -660,7 +670,7 @@ void LinearAlgebra::make_oDens(double p, vector<Gspinor> & Large, vector<Gspinor
 
 }
 
-
+// Make closed-shell relativistic Coulomb matrix. Includes open shell contributions.
 void LinearAlgebra::make_cG(vector<Gspinor> & Large, vector<Gspinor> & Small, int K1, int K2)
 {
 	// Closed shell Coulomb matrix evaluation routine. Only upper-right triangle is evaluted (symmetrize later).
@@ -747,6 +757,7 @@ void LinearAlgebra::make_cG(vector<Gspinor> & Large, vector<Gspinor> & Small, in
 
 }
 
+// Subtract excess open-shell contributions from relativistic Coulomb matrix.
 void LinearAlgebra::make_oG(vector<Gspinor> & Large, vector<Gspinor> & Small, int K1, int K2)
 {
 	// Open shell Coulomb matrix evaluation routine. Only upper-right triangle is evaluted (symmetrize later).
@@ -849,7 +860,7 @@ void LinearAlgebra::make_oG(vector<Gspinor> & Large, vector<Gspinor> & Small, in
 
 }
 
-// Standard atomic notations for Rel orbitals.
+// Standard atomic notations for relativistic orbitals. Used in printf/cout.
 string LinearAlgebra::SymbAng(int kappa)
 {
 	int l = kappa;
@@ -863,6 +874,7 @@ string LinearAlgebra::SymbAng(int kappa)
 	return Result;
 }
 
+// Fill lower triangle of symmetric non-relativistic matrix.
 void LinearAlgebra::sym_Matr(vector<Coulomb> & M)
 {
 	// Most of the matrixes in this code are symmetric, so only
@@ -884,6 +896,7 @@ void LinearAlgebra::sym_Matr(vector<Coulomb> & M)
 
 }
 
+// Fill lower triangle of symmetric relativistic matrix
 void LinearAlgebra::REL_sym_Matr(vector<Coulomb> & M)
 {
 	// Does same as relativistic, but keeps track of LL, SS, and LS blocks.
@@ -915,17 +928,6 @@ void LinearAlgebra::REL_sym_Matr(vector<Coulomb> & M)
 		}
 	}
 }
-
-/*
-int LinearAlgebra::save_if_converged(vector<Gspinor> & Large, vector<Gspinor> & Small)
-{
-	if (!converged) return 1;
-
-	
-
-
-	return 0;
-}*/
 
 
 LinearAlgebra::~LinearAlgebra()

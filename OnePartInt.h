@@ -25,7 +25,7 @@ using namespace std;
 
 class OnePartInt : AuxFunc
 {
-	// Class to evaluate one and two electron atomic integrals. 
+	// Class to evaluate one electron atomic integrals. 
 	// It normalizes the basis functions as well.
 public:
 	// Relativistic instance.

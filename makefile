@@ -1,3 +1,4 @@
+# Create a folder named "build" and adjust compiler according to the platform.
 CXX = g++
 CXXFLAGS = -O3 -std=c++11
 OBJ_DIR = build
@@ -11,4 +12,4 @@ Atom: $(OBJ_FILES)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
-	-rm -r $(OBJ_DIR)
+	-rm $(OBJ_DIR)/*

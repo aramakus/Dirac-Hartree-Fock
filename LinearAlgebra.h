@@ -50,21 +50,23 @@ private:
 	int max_iter = 50;
 	double Etoller = 0.000000000001;// Relative energy tollerance.
 	CardIn & input;
-	vector<MatrixXd> EigVecs;
-	vector<VectorXd> EigVals;
-	vector<MatrixXd> oEigVecs;
-	vector<VectorXd> oEigVals;
+	vector<MatrixXd> EigVecs; // close shell eigenvectors
+	vector<VectorXd> EigVals; // close shell eigenvalues
+	vector<MatrixXd> oEigVecs; // open shell eigenvectors
+	vector<VectorXd> oEigVals; // open shell eigenvalues
 
-	void make_cG(vector<Gspinor> & Large, int K1, int K2);
-	void make_oG(vector<Gspinor> & Large, int K);
-  void make_cDens(double p, vector<Gspinor> & Large);
-	void make_oDens(double p, vector<Gspinor> & Large);
+	void make_cG(vector<Gspinor> & Large, int K1, int K2); // Coulomb matrix elements, close shell
+	void make_oG(vector<Gspinor> & Large, int K); // Coulomb matrix elements, open shell
+  void make_cDens(double p, vector<Gspinor> & Large); // Density matrix, close shell
+	void make_oDens(double p, vector<Gspinor> & Large); // Density matrix, open shell
 
+  // Same as above, but relativistic.
   void make_cG(vector<Gspinor> & Large, vector<Gspinor> & Small, int K1, int K2);
 	void make_oG(vector<Gspinor> & Large, vector<Gspinor> & Small, int K1, int K2);
   void make_cDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small);
 	void make_oDens(double p, vector<Gspinor> & Large, vector<Gspinor> & Small);
 
+  // Create lower tiangle of symmetric matrix
   void sym_Matr(vector<Coulomb> & M);
   void REL_sym_Matr(vector<Coulomb> & M);
 	vector<int> Dim;// List of basis set size for each Kappa(L).

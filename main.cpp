@@ -38,8 +38,13 @@ This file is part of Atom.
 
 using namespace std;
 
+/*
+Atomic code for atomic structure calculations using finite basis Hartree-Fock approximation.
+Notations and variable names follow I. Grant "Relativistic Qunatum Theory of Atoms".
+*/
 int main(int argc, char *argv[])
 {
+  // Read input file content.
 	clock_t t = clock();
 	string logname = "log";
 	string filename = "";
@@ -57,12 +62,13 @@ int main(int argc, char *argv[])
 	}
 
 	// Initialize the basis set.
-	vector<Gspinor> Large;
-	vector<Gspinor> Small;
+	vector<Gspinor> Large; // Large component, radial wave function.
+	vector<Gspinor> Small; // Small component (rel only), radial wave function.
 
 	// Read an input file.
 	CardIn input(filename, Large, Small, log);
 
+  // Iterative solution of Hartree-Fock equations.
 	LinearAlgebra Solver(input);
 	if (input.Hamiltonian == "DHF")	{
 		Solver.SolveFock(Large, Small);

@@ -73,7 +73,7 @@ double TwoPartInt::Wigner3j(float j1, float j2, int j3)
     return Stored3j[i][j][k]; 
 }
 
-// The Good: T = L, T' = L.
+// The Good: T = L, T' = L. Only Good in non-relativistic calculations :-)
 double TwoPartInt::R_k_LL(int k, int a, int b, int c, int d, 
                           Gspinor & A, Gspinor & B, Gspinor & C, Gspinor & D)
 {
